@@ -1,0 +1,23 @@
+wget -q -O - http://169.254.169.254/latest/meta-data/instance-id;echo""
+ami-id
+hostname
+instance-id
+instance-type
+kernel-id
+local-hostname
+local-ipv4
+mac
+network
+public-hostname
+public-ipv4
+public-keys
+
+AWS 정보 싱크 동기화...? -> HOSTNAME 등 재설정
+/bin/hostname `/usr/bin/GET http://169.254.169.254/latest/meta-data/public-hostname`
+
+AMI 뜰때 상황별 
+- zone 이 다른경우 copy 를 통해 복사 
+- 계정이 다른경우 permission 을 통해 권한 부여
+
+Instance -> S3 데이터 전송
+http://www.kimjmin.net/2014/02/aws_4/
