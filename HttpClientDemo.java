@@ -19,50 +19,52 @@ public class HttpClientDemo{
 
 	public static void main(String[] args){
 		// TODO Auto-generated method stub
-		
-		String host = "";  
-		String port = "";
-		
+
+		// 프록시를 태워야되는 경우에만 설정
+		String proxyHost = "";
+		String proxyPort = "";
+
 		HttpClientBuilder httpClient = HttpClientBuilder.create();
-		httpClient.setProxy(new HttpHost(host, Integer.parseInt(port)));
-		
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		httpClient.setProxy(new HttpHost(proxyHost, Integer.parseInt(proxyPort)));
+
 		Map<String, Object> headers = new HashMap<String, Object>();
-		
-		parameters.put("", "");
+		Map<String, Object> parameters = new HashMap<String, Object>();		
+
 		headers.put("", "");
+		parameters.put("", "");
 
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-		for (Map.Entry<String, Object> parameter : parameters.entrySet()) {
+		for (Map.Entry<String, Object> parameter : parameters.entrySet()){
 			nvps.add(new BasicNameValuePair(parameter.getKey(), parameter.getValue().toString()));
 		}
-		
+
 		String url = "";
 		String method = "";
 		HttpRequestBase request = null;
-		
-		if(method.equals("GET")) {
+
+		if (method.equals("GET")){
 			HttpGet httpGet = new HttpGet(url);
 			request = httpGet;
-		} else if(method.equals("POST")) {
+		} else if (method.equals("POST")){
 			HttpPost httpPost = new HttpPost(url);
-			try {
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
-			} catch (UnsupportedEncodingException e) {
-				
+			try{
+				httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
+			} catch (UnsupportedEncodingException e){
+
 			}
 			request = httpPost;
 		}
-		
-		for (Map.Entry<String, Object> header : headers.entrySet()) {
+
+		for (Map.Entry<String, Object> header : headers.entrySet()){
 			request.setHeader(header.getKey(), header.getValue().toString());
 		}
 
-		try {
+		try{
 			HttpResponse httpResponse = httpClient.build().execute(request);
-		} catch (IOException e) {
-			
+		} catch (IOException e){
+
 		}
+
 	}
 
 }
